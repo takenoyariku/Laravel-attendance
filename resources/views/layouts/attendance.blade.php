@@ -78,9 +78,9 @@
         </main>
     </div>
     <aside id="sub">
-        <a class="navbar-brand" href="/Users/takenoyariku/勤怠管理/attendance-list.html">勤怠一覧</a>
-        <a class="navbar-brand" href="/Users/takenoyariku/勤怠管理/employee-list.html">従業員一覧</a>
-        <a class="navbar-brand" href="/Users/takenoyariku/勤怠管理/field-list.html">現場一覧</a>
+        <a class="navbar-brand" href="/attendance-list">勤怠一覧</a>
+        <a class="navbar-brand" href="/employee-list">従業員一覧</a>
+        <a class="navbar-brand" href="/field-list">現場一覧</a>
     </aside>
     <script src="{{ asset('/js/attendance.js') }}">
     </script>

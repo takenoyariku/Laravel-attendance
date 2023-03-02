@@ -18,14 +18,6 @@
                     <form action="{{ route('attendance-store') }}" method="POST" onSubmit="return checkSubmit()" enctype="multipart/form-data">
                     @csrf
                         <div class="form-group row">
-                            <input type="hidden" name="id" class="form-control" value="{{ $attendance -> id }}">
-                            @if($errors -> has('id'))
-                                <div class="text-danger">
-                                    {{ $errors -> first('id') }}
-                                </div>
-                            @endif
-                        </div>
-                        <div class="form-group row">
                                 <label for="date" class="col-md-4 col-form-label text-md-right">日付</label>
                             <div class="form-time">
                                 <input id="date" type="date" class="form-control-untext" name="date">

@@ -33,13 +33,12 @@ class FieldController extends Controller
     }
 
     /**
-     * 勤怠登録画面を表示する
+     * 現場登録画面を表示する
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
      public function showAttendanceCreate(Request $request) {
 
-        $employees = Employee::all();
         $fields = Field::all();
         
         return view('attendance.attendance_create', compact('employees', 'fields'));
@@ -56,8 +55,8 @@ class FieldController extends Controller
 
         \DB::beginTransaction();
         try {
-            // 商品を登録
-            Attendance::create($inputs);
+            // 現場を登録
+            field::create($inputs);
             \DB::commit();
         } catch(\Throwable $e) {
             \DB::rollback();
