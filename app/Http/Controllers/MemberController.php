@@ -9,9 +9,9 @@ use App\Models\Field;
 use App\Models\Employee;
 use App\User;
 
-class AdminController extends Controller
+class MemberController extends Controller
 {
-        /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -21,36 +21,20 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
-
-    /**
-     * ユーザ覧表示
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function showAdminList()
-    {
-        $user = new User;
-        $admins = $user -> admins();
-        $members = $user -> members();
-
-        return view('admin.admin_list', compact('admins', 'members'));
-    }
-
     /**
      * ユーザ詳細表示
      * @param int $id
      * @return \Illuminate\Contracts\Support\Renderable 
      */
-    public function showAdminDetail($id) {
+    public function showMemberDetail($id) {
         $user = User::find($id);
 
         if(is_null($user)) {
             \Session::flash('err_msg', 'データがありません。');
-            return redirect(route('admin'));
+            return redirect(route('attendance-list'));
         }
 
-        return view('admin.admin_detail', compact('user'));
+        return view('member.member_detail', compact('user'));
     }
 
         /**
@@ -58,10 +42,10 @@ class AdminController extends Controller
     * @param int $id
     * @return \Illuminate\Contracts\Support\Renderable
     */
-    public function showAdminEdit($id) {
+    public function showMemberEdit($id) {
         $user = User::find($id);
 
-        return view('admin.admin_edit', compact('user'));
+        return view('member.member_edit', compact('user'));
     }
 
     /**
@@ -69,7 +53,7 @@ class AdminController extends Controller
     * @return \Illuminate\Contracts\Support\Renderable
     */
 
-    public function exeAdminUpdate(Request $request) {
+    public function exeMemberUpdate(Request $request) {
         // ユーザのデータを受け取る
         $inputs = $request -> all();
 
@@ -90,31 +74,7 @@ class AdminController extends Controller
         };
 
         \Session::flash('err_msg', 'ユーザ情報を更新しました。');
-        return redirect(route('admin'));
+        return redirect(route('attendance-list'));
     }
-
-    /**
-    * ユーザ削除
-    * @param int $id
-    * @return view
-    */
-    public function exeAdminDelete($id) {
-
-        if(empty($id)) {
-            \Session::flash('err_msg', 'データがありません。');
-            return redirect(route('admin'));
-        }
-
-        try {
-            //ユーザを削除
-            User::destroy($id);
-        } catch(\Throwable $e) {
-            abort(500);
-        };
-
-        \Session::flash('err_msg', '削除しました。');
-        return redirect(route('admin'));
-    }
-
-    
+   
 }

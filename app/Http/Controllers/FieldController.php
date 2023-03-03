@@ -7,6 +7,8 @@ use App\Models\Attendance;
 use App\Models\Field;
 use App\Models\Employee;
 use App\User;
+use App\Http\Requests\FieldRequest;
+
 
 class FieldController extends Controller
 {
@@ -37,118 +39,87 @@ class FieldController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-     public function showAttendanceCreate(Request $request) {
+     public function showFieldCreate(Request $request) {
 
-        $fields = Field::all();
-        
-        return view('attendance.attendance_create', compact('employees', 'fields'));
+        return view('field.field_create');
     }
 
     /**
-     * 勤怠を登録する
+     * 現場を登録する
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function exeAttendanceStore(Request $request) {
+    public function exeFieldStore(FieldRequest $request) {
 
         $inputs = $request -> all();
 
         \DB::beginTransaction();
         try {
             // 現場を登録
-            field::create($inputs);
+            Field::create($inputs);
             \DB::commit();
         } catch(\Throwable $e) {
             \DB::rollback();
             abort(500);
         };
 
-        \Session::flash('err_msg', '勤怠を登録しました。');
-        return redirect(route('attendance-list'));
+        \Session::flash('err_msg', '現場情報を登録しました。');
+        return redirect(route('field-list'));
     }
 
     /**
-     * 勤怠詳細を表示する
+     * 現場詳細を表示する
      * @param int $id
      * @return \Illuminate\Contracts\Support\Renderable 
      */
-    public function showAttendanceDetale($id) {
-        $attendance = Attendance::with('fields','employees') -> find($id);
+    public function showFieldDetale($id) {
+        $field = Field::find($id);
 
-        if(is_null($attendance)) {
+        if(is_null($field)) {
             \Session::flash('err_msg', 'データがありません。');
-            return redirect(route('attendance_list'));
+            return redirect(route('field-list'));
         }
 
-        return view('attendance.attendance_detail', compact('attendance'));
+        return view('field.field_detail', compact('field'));
     }
 
     /**
-     * 勤怠登録画面を表示する
+     * 現場登録画面を表示する
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-     public function showAttendanceEdit($id) {
-        $attendance = Attendance::find($id);
-        $employees = Employee::all();
-        $fields = Field::all();
+     public function showFieldEdit($id) {
+        $field = Field::find($id);
         
-        return view('attendance.attendance_edit', compact('attendance', 'employees', 'fields'));
+        return view('field.field_edit', compact('field'));
     }
 
     /**
-     * 勤怠を更新する
+     * 現場を更新する
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-     public function exeAttendanceUpdate(Request $request) {
+     public function exeFieldUpdate(FieldRequest $request) {
 
         $inputs = $request -> all();
 
         \DB::beginTransaction();
         try {
             // 商品を更新
-            $attendance = Attendance::find($inputs['id']);
-            $attendance -> fill([
-             'date' => $inputs['date'],
-             'field_id' => $inputs['field_id'],
-             'employee_id' => $inputs['employee_id'],
-             'start_time' => $inputs['start_time'],
-             'closing_time' => $inputs['closing_time'],
-             'overtime' => $inputs['overtime'],
-             'attendance_comment' => $inputs['attendance_comment'],
+            $field = Field::find($inputs['id']);
+            $field -> fill([
+             'field_name' => $inputs['field_name'],
+             'field_comment' => $inputs['field_comment'],
             ]);
-            $attendance -> save();
+            $field -> save();
             \DB::commit();
         } catch(\Throwable $e) {
             \DB::rollback();
             abort(500);
         };
 
-        \Session::flash('err_msg', '勤怠を更新しました。');
-        return redirect(route('attendance-list'));
+        \Session::flash('err_msg', '現場情報を更新しました。');
+        return redirect(route('field-list'));
     }
 
-    /**
-    * 勤怠削除
-    * @param int $id
-    * @return view
-    */
-    public function exeAttendanceDelete($id) {
-
-        if(empty($id)) {
-            \Session::flash('err_msg', 'データがありません。');
-            return redirect(route('attendance-list'));
-        }
-
-        try {
-            //勤怠を削除
-            Attendance::destroy($id);
-        } catch(\Throwable $e) {
-            abort(500);
-        };
-
-        \Session::flash('err_msg', '削除しました。');
-        return redirect(route('attendance-list'));
-    }
 }

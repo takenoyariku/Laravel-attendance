@@ -6,7 +6,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    勤怠編集
+                    <h4>
+                        勤怠編集
+                    </h4>
                 </div>
 
                 <div class="card-body">

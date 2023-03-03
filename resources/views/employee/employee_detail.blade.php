@@ -8,28 +8,28 @@
                 
                 <div class="card-header">
                     <h4>
-                    現場詳細
+                    従業員詳細
                     </h4>
                     <div class="legacy-button">
-                        <a href="/field-edit/{{ $field -> id }}"><i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                        <a href="/employee-edit/{{ $employee -> id }}"><i class="fa-solid fa-pen-to-square fa-2x"></i></a>
                     </div>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped" id="product">
                         <tr>
-                            <th>現場</th>
+                            <th>従業員氏名</th>
                             <th>備考</th>
                         </tr>
                         <tr class="dbconect">
-                            <td class="dbconect">{{ $field -> field_name }}</td>
-                            <td class="dbconect">{{ $field -> field_comment }}</td>
+                            <td class="dbconect">{{ $employee -> employee_name }}</td>
+                            <td class="dbconect">{{ $employee -> employee_comment }}</td>
                         </tr>
                     </table>
                     <div class="delete">
                         <button class="btn btn-delete">削除する</button>
                     </div>
                     <div class="back">
-                        <button class="btn back" onclick="location.href='{{ route('field-list') }}'">戻る</button>
+                        <button class="btn back" onclick="location.href='{{ route('employee-list') }}'">戻る</button>
                     </div>
                 </div>
             </div>

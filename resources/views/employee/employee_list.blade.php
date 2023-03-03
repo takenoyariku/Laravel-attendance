@@ -8,15 +8,15 @@
             
                 <div class="card-header">
                     <h4>
-                    現場一覧
+                    従業員一覧
                     </h4>
                 <div class="legacy-button">
-                    <a href="/field-create" class="btn btn--circle btn--circle-c btn--shadow">＋</a>
+                    <a href="/employee-create" class="btn btn--circle btn--circle-c btn--shadow">＋</a>
                 </div>
                 </div>
-                @foreach ($fields as $field)
+                @foreach ($employees as $employee)
                 <div class="card-body list-button">
-                    <a href="/field-detail/{{ $field -> id }}" class="btn btn--green">{{ $field -> field_name }}</a>
+                    <a href="/employee-detail/{{ $employee -> id }}" class="btn btn--green">{{ $employee -> employee_name }}</a>
                 </div>
                 @endforeach
             </div>

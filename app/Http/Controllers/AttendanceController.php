@@ -51,7 +51,7 @@ class AttendanceController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function exeAttendanceStore(Request $request) {
+    public function exeAttendanceStore(AttendanceRequest $request) {
 
         $inputs = $request -> all();
 
@@ -103,7 +103,7 @@ class AttendanceController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-     public function exeAttendanceUpdate(Request $request) {
+     public function exeAttendanceUpdate(AttendanceRequest $request) {
 
         $inputs = $request -> all();
 

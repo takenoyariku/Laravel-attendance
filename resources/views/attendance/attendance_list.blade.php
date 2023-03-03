@@ -6,7 +6,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    勤怠一覧
+                    <h4>
+                        勤怠一覧
+                    </h4>
                     <div class="legacy-button">
                         <a href="{{ route('attendance-create') }}" class="btn btn--circle btn--circle-c btn--shadow">＋</a>
                     </div>

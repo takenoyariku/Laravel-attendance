@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                    勤怠詳細
+                        勤怠詳細
                     </h4>
                     <div class="legacy-button">
                         <a href="/attendance-edit/{{$attendance -> id}}"><i class="fa-solid fa-pen-to-square fa-2x"></i></a>
