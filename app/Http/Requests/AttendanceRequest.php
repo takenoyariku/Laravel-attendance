@@ -31,7 +31,7 @@ class AttendanceRequest extends FormRequest
             'start_time' => 'required',
             'closing_time' => 'required',
             'overtime' => 'required',
-            'attendance_comment' => 'required | max:255',
+            'attendance_comment' => 'nullable | max:255',
         ];
     }
 }

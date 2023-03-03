@@ -53,14 +53,14 @@
                             <label for="start_time" class="col-md-4 col-form-label text-md-right">勤務時間</label>
 
                             <div class="form-time">
-                                <input id="start_time" type="time" class="form-control-untext" name="start_time">　〜　<input id="closing_time" type="time" class="form-control-untext" name="closing_time">
+                                <input id="start_time" type="time" class="form-control-untext" name="start_time" value="00:00" step="900">　〜　<input id="closing_time" type="time" class="form-control-untext" name="closing_time" value="00:00" step="900">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="overtime" class="col-md-4 col-form-label text-md-right">残業時間</label>
 
                             <div class="col-md-6">
-                                <input id="overtime" type="time" class="form-control" name="overtime">
+                                <input id="overtime" type="time" class="form-control" name="overtime" value="00:00" step="900">
                             </div>
                         </div>
                         <div class="form-group row">

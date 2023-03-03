@@ -18,7 +18,7 @@ class EmployeeController extends Controller
     */
     public function __construct()
     {
-    $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -28,9 +28,9 @@ class EmployeeController extends Controller
     */
     public function showEmployeeList()
     {
-    $employees = Employee::all();
+        $employees = Employee::all();
 
-    return view('employee.employee_list',compact('employees'));
+        return view('employee.employee_list',compact('employees'));
     }
 
     /**
@@ -40,7 +40,7 @@ class EmployeeController extends Controller
 
     public function showEmployeeCreate(Request $request) {
 
-    return view('employee.employee_create');
+        return view('employee.employee_create');
     }
 
     /**
@@ -50,20 +50,20 @@ class EmployeeController extends Controller
 
     public function exeEmployeeStore(EmployeeRequest $request) {
 
-    $inputs = $request -> all();
+        $inputs = $request -> all();
 
-    \DB::beginTransaction();
-    try {
-        // 現場を登録
-        Employee::create($inputs);
-        \DB::commit();
-    } catch(\Throwable $e) {
-        \DB::rollback();
-        abort(500);
-    };
+        \DB::beginTransaction();
+        try {
+            // 現場を登録
+            Employee::create($inputs);
+            \DB::commit();
+        } catch(\Throwable $e) {
+            \DB::rollback();
+            abort(500);
+        };
 
-    \Session::flash('err_msg', '従業員情報を登録しました。');
-    return redirect(route('employee-list'));
+        \Session::flash('err_msg', '従業員情報を登録しました。');
+        return redirect(route('employee-list'));
     }
 
     /**
@@ -72,14 +72,14 @@ class EmployeeController extends Controller
     * @return \Illuminate\Contracts\Support\Renderable 
     */
     public function showEmployeeDetale($id) {
-    $employee = Employee::find($id);
+        $employee = Employee::find($id);
 
-    if(is_null($employee)) {
-        \Session::flash('err_msg', 'データがありません。');
-        return redirect(route('field-list'));
-    }
+        if(is_null($employee)) {
+            \Session::flash('err_msg', 'データがありません。');
+            return redirect(route('field-list'));
+        }
 
-    return view('employee.employee_detail', compact('employee'));
+        return view('employee.employee_detail', compact('employee'));
     }
 
     /**
@@ -88,9 +88,9 @@ class EmployeeController extends Controller
     */
 
     public function showEmployeeEdit($id) {
-    $employee = Employee::find($id);
+        $employee = Employee::find($id);
 
-    return view('employee.employee_edit', compact('employee'));
+        return view('employee.employee_edit', compact('employee'));
     }
 
     /**
@@ -100,25 +100,49 @@ class EmployeeController extends Controller
 
     public function exeEmployeeUpdate(EmployeeRequest $request) {
 
-    $inputs = $request -> all();
+        $inputs = $request -> all();
 
-    \DB::beginTransaction();
-    try {
-        // 商品を更新
-        $employee = Employee::find($inputs['id']);
-        $employee -> fill([
-        'employee_name' => $inputs['employee_name'],
-        'employee_comment' => $inputs['employee_comment'],
-        ]);
-        $employee -> save();
-        \DB::commit();
-    } catch(\Throwable $e) {
-        \DB::rollback();
-        abort(500);
-    };
+        \DB::beginTransaction();
+        try {
+            // 商品を更新
+            $employee = Employee::find($inputs['id']);
+            $employee -> fill([
+            'employee_name' => $inputs['employee_name'],
+            'employee_comment' => $inputs['employee_comment'],
+            ]);
+            $employee -> save();
+            \DB::commit();
+        } catch(\Throwable $e) {
+            \DB::rollback();
+            abort(500);
+        };
 
-    \Session::flash('err_msg', '従業員情報を更新しました。');
-    return redirect(route('employee-list'));
+        \Session::flash('err_msg', '従業員情報を更新しました。');
+        return redirect(route('employee-list'));
+    }
+
+    /**
+    * 従業員削除
+    * @param int $id
+    * @return view
+    */
+    public function exeEmployeeDelete($id) {
+
+        if(empty($id)) {
+            \Session::flash('err_msg', 'データがありません。');
+            return redirect(route('attendance-list'));
+        }
+
+        try {
+            //従業員を削除
+            $employee = new Employee;
+            $employee = Employee::find($id) -> delete();
+        } catch(\Throwable $e) {
+            abort(500);
+        };
+
+        \Session::flash('err_msg', '削除しました。');
+        return redirect(route('employee-list'));
     }
 
 }

@@ -26,7 +26,7 @@ class FieldRequest extends FormRequest
     {
         return [
             'field_name' => 'required',
-            'field_comment' => 'required',
+            'field_comment' => 'nullable',
         ];
     }
 }

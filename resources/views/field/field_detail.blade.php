@@ -26,7 +26,7 @@
                         </tr>
                     </table>
                     <div class="delete">
-                        <button class="btn btn-delete">削除する</button>
+                        <button class="btn btn-delete" onclick="location.href='/field-delete/{{ $field -> id }}'">削除する</button>
                     </div>
                     <div class="back">
                         <button class="btn back" onclick="location.href='{{ route('field-list') }}'">戻る</button>

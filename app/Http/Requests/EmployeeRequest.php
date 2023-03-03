@@ -26,7 +26,7 @@ class EmployeeRequest extends FormRequest
     {
         return [
             'employee_name' => 'required',
-            'employee_comment' => 'required',
+            'employee_comment' => 'nullable',
         ];
     }
 }

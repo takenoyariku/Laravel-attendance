@@ -11,7 +11,7 @@ use App\Http\Requests\AttendanceRequest;
 
 class AttendanceController extends Controller
 {
-        /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -28,7 +28,7 @@ class AttendanceController extends Controller
      */
     public function showAttendanceList()
     {
-        $attendances = Attendance::with('fields','employees')->get();
+        $attendances = Attendance::with('fields','employees') -> withTrashed() -> get();
 
         return view('attendance.attendance_list',compact('attendances'));
     }
@@ -75,7 +75,7 @@ class AttendanceController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable 
      */
     public function showAttendanceDetale($id) {
-        $attendance = Attendance::with('fields','employees') -> find($id);
+        $attendance = Attendance::with('fields','employees') -> withTrashed() -> find($id);
 
         if(is_null($attendance)) {
             \Session::flash('err_msg', 'データがありません。');
@@ -86,14 +86,14 @@ class AttendanceController extends Controller
     }
 
     /**
-     * 勤怠登録画面を表示する
+     * 勤怠編集画面を表示する
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
      public function showAttendanceEdit($id) {
-        $attendance = Attendance::find($id);
-        $employees = Employee::all();
-        $fields = Field::all();
+        $attendance = Attendance::withTrashed() -> find($id);
+        $employees = Employee::withTrashed() -> get();
+        $fields = Field::withTrashed() -> get();
         
         return view('attendance.attendance_edit', compact('attendance', 'employees', 'fields'));
     }
@@ -110,7 +110,7 @@ class AttendanceController extends Controller
         \DB::beginTransaction();
         try {
             // 商品を更新
-            $attendance = Attendance::find($inputs['id']);
+            $attendance = Attendance::withTrashed() -> find($inputs['id']);
             $attendance -> fill([
              'date' => $inputs['date'],
              'field_id' => $inputs['field_id'],
@@ -145,7 +145,7 @@ class AttendanceController extends Controller
 
         try {
             //勤怠を削除
-            Attendance::destroy($id);
+            Attendance::withTrashed() -> forceDelete($id);
         } catch(\Throwable $e) {
             abort(500);
         };

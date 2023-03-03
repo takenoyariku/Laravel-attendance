@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Employee;
 use App\Models\Field;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Attendance extends Model
 {
+
+    use SoftDeletes;
+
     protected $fillable = 
     [
         'date',
@@ -20,11 +24,11 @@ class Attendance extends Model
     ];
 
     public function employees() {
-        return $this->belongsTo('App\Models\Employee', 'employee_id');
+        return $this -> belongsTo('App\Models\Employee', 'employee_id') -> withTrashed();
     }
 
     public function fields() {
-        return $this->belongsTo('App\Models\Field', 'field_id');
+        return $this -> belongsTo('App\Models\Field', 'field_id') -> withTrashed();
     }
 
     protected $dates = [

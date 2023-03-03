@@ -122,4 +122,28 @@ class FieldController extends Controller
         return redirect(route('field-list'));
     }
 
+        /**
+    * 従業員削除
+    * @param int $id
+    * @return view
+    */
+    public function exeFieldDelete($id) {
+
+        if(empty($id)) {
+            \Session::flash('err_msg', 'データがありません。');
+            return redirect(route('attendance-list'));
+        }
+
+        try {
+            //現場を削除
+            $field = new Field;
+            $field = Field::find($id) -> delete();
+        } catch(\Throwable $e) {
+            abort(500);
+        };
+
+        \Session::flash('err_msg', '削除しました。');
+        return redirect(route('field-list'));
+    }
+
 }

@@ -11,7 +11,7 @@ use App\User;
 
 class AdminController extends Controller
 {
-        /**
+    /**
      * Create a new controller instance.
      *
      * @return void

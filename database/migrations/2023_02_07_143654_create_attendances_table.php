@@ -27,7 +27,7 @@ class CreateAttendancesTable extends Migration
             $table->time('start_time');
             $table->time('closing_time');
             $table->time('overtime');
-            $table->string('attendance_comment');
+            $table->string('attendance_comment')->nullable();
             $table->timestamps();
         });
     }

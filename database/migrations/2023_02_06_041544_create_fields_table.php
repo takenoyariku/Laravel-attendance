@@ -16,7 +16,7 @@ class CreateFieldsTable extends Migration
         Schema::create('fields', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('field_name');
-            $table->string('field_comment');
+            $table->string('field_comment')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
