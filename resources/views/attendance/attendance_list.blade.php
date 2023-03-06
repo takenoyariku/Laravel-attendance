@@ -10,9 +10,29 @@
                         勤怠一覧
                     </h4>
                     <div class="legacy-button">
-                        <a href="{{ route('attendance-create') }}" class="btn btn--circle btn--circle-c btn--shadow">＋</a>
+                        <a href="/attendance-create" class="btn btn--circle btn--circle-c btn--shadow">＋</a>
                     </div>
                 </div>
+
+                <form action="{{ route('attendance-list') }}" method="GET">
+                @csrf
+                    <div class="search">
+                        <label>対象期間</label>
+                        <select id="year" name="year">
+                        @foreach ($attendances as $attendance)
+                            <option value ="{{ $attendance -> date -> format('Y') }}">{{ $attendance -> date -> format('Y') }}</option>
+                        @endforeach
+                        </select>
+                        <select id="month" name="month">
+                        @foreach ($attendances as $attendance)
+                            <option value ="{{ $attendance -> date -> format('m') }}">{{ $attendance -> date -> format('m') }}</option>
+                        @endforeach
+                        </select>
+                        <button type="submit" class="btn btn-primary">
+                            表示する
+                        </button>
+                    </div>
+                </form>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -29,12 +49,12 @@
                             <th></th>
                         </tr>
 
-                        @foreach($attendances as $attendance)
+                        @foreach($lists as $list)
                         <tr class="dbconect">
-                            <td class="dbconect">{{ $attendance -> fields -> field_name }}</td>
-                            <td class="dbconect">{{ $attendance -> employees -> employee_name }}</td>
-                            <td class="dbconect">{{ $attendance -> start_time }} 〜 {{ $attendance -> closing_time }}</td>
-                            <td class="dbconect">{{ $attendance -> overtime }}</td>
+                            <td class="dbconect">{{ $list -> fields -> field_name }}</td>
+                            <td class="dbconect">{{ $list -> employees -> employee_name }}</td>
+                            <td class="dbconect">{{ $list -> start_time }} 〜 {{ $attendance -> closing_time }}</td>
+                            <td class="dbconect">{{ $list -> overtime }}</td>
                             <td class="dbconect">                        
                                 <button class="btn btn-detail" onclick="location.href='/attendance-detail/{{ $attendance -> id }}'">詳細</button>
                             </td>
@@ -46,9 +66,9 @@
                             <th>従業員氏名</th>
                             <th>残業時間合計</th>
                         </tr>
-                        @foreach($attendances as $attendance)
+                        @foreach($lists as $list)
                         <tr>
-                            <td>{{ $attendance -> employees -> employee_name }}</td>
+                            <td>{{ $list -> employees -> employee_name }}</td>
                             <td>6H</td>
                         </tr>
                         @endforeach

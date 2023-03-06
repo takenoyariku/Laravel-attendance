@@ -6,21 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Employee;
 use App\Models\Field;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class Attendance extends Model
 {
 
     use SoftDeletes;
 
-    protected $fillable = 
-    [
+    protected $guarded = ['created_at', 'updated_at'];
+
+    protected $dates = [
         'date',
-        'field_id',
-        'employee_id',
-        'start_time',
-        'closing_time',
-        'overtime',
-        'attendance_comment',
     ];
 
     public function employees() {
@@ -31,8 +27,10 @@ class Attendance extends Model
         return $this -> belongsTo('App\Models\Field', 'field_id') -> withTrashed();
     }
 
-    protected $dates = [
-        'date',
-    ];
+    public function attendances() {
+        return $this::withTrashed()
+        ->with('fields','employees')
+        ->get();
+    }
 
 }

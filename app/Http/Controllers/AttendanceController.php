@@ -8,6 +8,7 @@ use App\Models\Field;
 use App\Models\Employee;
 use App\User;
 use App\Http\Requests\AttendanceRequest;
+use Carbon\Carbon;
 
 class AttendanceController extends Controller
 {
@@ -26,11 +27,30 @@ class AttendanceController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function showAttendanceList()
-    {
-        $attendances = Attendance::with('fields','employees') -> withTrashed() -> get();
+    public function showAttendanceList(Request $request) {
+        $attendance = new Attendance;
+        $attendances = $attendance -> attendances();
+        $time = Carbon::now();
 
-        return view('attendance.attendance_list',compact('attendances'));
+        //検索機能
+        $year = $request -> input('year');
+        $month = $request -> input('month');
+        
+        $query = Attendance::query() -> withTrashed();
+
+        if (empty($year) || empty($month)) {
+            $query -> whereYear('date', $time);
+        }
+        if (!empty($year)) {
+            $query -> whereYear('date',  $year);
+        }
+        if (!empty($month)) {
+            $query -> whereMonth('date',  $month);
+        }
+
+        $lists = $query -> get();
+
+        return view('attendance.attendance_list',compact('attendances', 'lists'));
     }
 
     /**
@@ -51,7 +71,7 @@ class AttendanceController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function exeAttendanceStore(AttendanceRequest $request) {
+    public function exeAttendanceStore(Request $request) {
 
         $inputs = $request -> all();
 

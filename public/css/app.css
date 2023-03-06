@@ -11088,3 +11088,8 @@ a.btn--green:hover {
 .table-user {
   width: 60%;
 }
+
+.search {
+  
+  display: flex;
+}

@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Carbon\Carbon;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+
     ];
 
     /**
@@ -24,8 +25,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // 3年ごとにデータベースを削除する
+        $schedule->call(function () {
+            $threeYearsAgo = Carbon::now()->subYears(3)->toDateTimeString();
+            \DB::table('attendances')->where('date', '<=', $threeYearsAgo)->delete();
+        })->everyMinute();
     }
 
     /**
