@@ -81,6 +81,9 @@
                             </div>
                         </div>
                     </form>
+                    <button class="btn btn-light" onclick="location.href='/member-detail/{{ $user -> id }}'">
+                        戻る
+                    </button>
                 </div>
             </div>
         </div>

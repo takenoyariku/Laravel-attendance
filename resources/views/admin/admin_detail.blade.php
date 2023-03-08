@@ -29,7 +29,7 @@
                             <td class="dbconect">{{ $user -> email }}</td>
                         </tr>
                     </table>
-                    <button class="btn back" onclick="location.href='/admin'">
+                    <button class="btn btn-light" onclick="location.href='/admin'">
                     戻る
                     </button>
                 </div>

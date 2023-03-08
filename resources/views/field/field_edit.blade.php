@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     </form>
-                    <button class="btn back" onclick="location.href='/field-detail/{{ $field -> id }}'">
+                    <button class="btn btn-light" onclick="location.href='/field-detail/{{ $field -> id }}'">
                         戻る
                     </button>
                 </div>

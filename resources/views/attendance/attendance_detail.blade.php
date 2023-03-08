@@ -32,10 +32,10 @@
                         </tr>
                     </table>
                     <div class="delete">
-                        <button class="btn btn-delete" onclick="location.href='/attendance-delete/{{ $attendance -> id }}'">削除する</button>
+                        <button class="btn btn-danger" onclick="location.href='/attendance-delete/{{ $attendance -> id }}'">削除する</button>
                     </div>
                     <div class="back">
-                        <button class="btn back" onclick="location.href='{{ route('attendance-list') }}'">戻る</button>
+                        <button class="btn btn-light" onclick="location.href='{{ route('attendance-list') }}'">戻る</button>
                     </div>
                 </div>
             </div>

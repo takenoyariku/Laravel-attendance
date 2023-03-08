@@ -78,7 +78,7 @@
                             </div>
                         </div>
                     </form>
-                    <button class="btn back" onclick="location.href='{{ route('attendance-list') }}'">
+                    <button class="btn btn-light" onclick="location.href='{{ route('attendance-list') }}'">
                         戻る
                     </button>
                 </div>

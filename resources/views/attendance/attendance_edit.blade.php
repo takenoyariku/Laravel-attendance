@@ -87,12 +87,12 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    登録する
+                                    更新する
                                 </button>
                             </div>
                         </div>
                     </form>
-                    <button class="btn back" onclick="location.href='/attendance-detail/{{ $attendance -> id }}'">
+                    <button class="btn btn-light" onclick="location.href='/attendance-detail/{{ $attendance -> id }}'">
                         戻る
                     </button>
                 </div>

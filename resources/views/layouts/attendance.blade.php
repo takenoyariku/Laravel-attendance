@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-language" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -72,15 +73,21 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
+        <main class="py-3">
+            <div class="flex-box">
+                <div class="col-md-2" id="sidebar">
+                    <div class="sidebar-contents">
+                        <ul class="nav-sidebar">
+                            <li class="active"><a href="{{ route('attendance-list') }}">勤怠一覧</a></li>
+                            <li class="active"><a href="{{ route('employee-list') }}">従業員一覧</a></li>
+                            <li class="active"><a href="{{ route('field-list') }}">現場一覧</a></li>
+                        </ul>
+                    </div>
+                </div>
+                @yield('content')
+            </div>
         </main>
     </div>
-    <aside id="sub">
-        <a class="navbar-brand" href="/attendance-list">勤怠一覧</a>
-        <a class="navbar-brand" href="/employee-list">従業員一覧</a>
-        <a class="navbar-brand" href="/field-list">現場一覧</a>
-    </aside>
     <script src="{{ asset('/js/attendance.js') }}">
     </script>
 </body>

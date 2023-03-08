@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h4>
@@ -42,21 +42,23 @@
                     @endif
                     <table class="table table-striped">
                         <tr>
-                            <th>現場</th>
-                            <th>従業員氏名</th>
-                            <th>勤務時間</th>
-                            <th>残業時間</th>
-                            <th></th>
+                            <th style="width: 10%"></th>
+                            <th style="width: 20%">現場</th>
+                            <th style="width: 10%">氏名</th>
+                            <th style="width: 20%">勤務時間</th>
+                            <th style="width: 15%">残業時間</th>
+                            <th style="width: 10%"></th>
                         </tr>
 
                         @foreach($lists as $list)
                         <tr class="dbconect">
+                            <td></td>
                             <td class="dbconect">{{ $list -> fields -> field_name }}</td>
                             <td class="dbconect">{{ $list -> employees -> employee_name }}</td>
                             <td class="dbconect">{{ $list -> start_time }} 〜 {{ $attendance -> closing_time }}</td>
                             <td class="dbconect">{{ $list -> overtime }}</td>
                             <td class="dbconect">                        
-                                <button class="btn btn-detail" onclick="location.href='/attendance-detail/{{ $attendance -> id }}'">詳細</button>
+                                <button class="btn btn-light" onclick="location.href='/attendance-detail/{{ $attendance -> id }}'">詳細</button>
                             </td>
                         </tr>
                         @endforeach

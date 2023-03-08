@@ -27,7 +27,7 @@
                         <tr class="dbconect">
                             <td class="table-user">{{ $admin -> name }}</td>
                             <td class="dbconect">                        
-                                <button class="btn btn-detail" onclick="location.href='/admin-detail/{{ $admin -> id }}'">詳細</button>
+                                <button class="btn btn-light" onclick="location.href='/admin-detail/{{ $admin -> id }}'">詳細</button>
                             </td>
                         </tr>
                         @endforeach
@@ -42,9 +42,9 @@
                         <tr class="dbconect">
                             <td class="table-user">{{ $member -> name }}</td>
                             <td class="dbconect">                        
-                                <button class="btn btn-detail" onclick="location.href='/admin-detail/{{ $member -> id }}'">詳細</button>
+                                <button class="btn btn-light" onclick="location.href='/admin-detail/{{ $member -> id }}'">詳細</button>
                             </td>
-                                <td><button class="btn btn-delete" onclick="location.href='/admin-delete/{{ $member -> id }}'">削除</button></td>
+                                <td><button class="btn btn-danger" onclick="location.href='/admin-delete/{{ $member -> id }}'">削除</button></td>
                         </tr>
                         @endforeach
                     </table>
