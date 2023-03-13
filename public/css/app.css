@@ -238,7 +238,8 @@ th {
 
 label {
   display: inline-block;
-  margin-bottom: 0.5rem;
+  font-size: 18px;
+  padding: 5px 20px;
 }
 
 button {
@@ -5043,8 +5044,16 @@ input[type=button].btn-block {
   padding: 1.25rem;
 }
 
+.card-list {
+  flex: 1 1 auto;
+  min-height: 1px;
+}
+
 .card-title {
+  font-size: 40px;
+  height: 120px;
   margin-bottom: 0.75rem;
+  padding: 30px 0px;
 }
 
 .card-subtitle {
@@ -7082,6 +7091,7 @@ button.bg-dark:focus {
 
 .bg-white {
   background-color: #6e9b0a !important;
+  border-bottom: 0.5rem solid #ffe400;
 }
 
 .bg-transparent {
@@ -8629,11 +8639,6 @@ button.bg-dark:focus {
 
 .p-3 {
   padding: 1rem !important;
-}
-
-.pt-3,
-.py-3 {
-  padding-top: 1rem !important;
 }
 
 .pr-3,
@@ -11121,6 +11126,10 @@ a.btn--green:hover {
 
 #sidebar ul li a:hover {
     background-color: #ADD99B;
+}
+
+.btn-flex-box {
+  display: inline-block;
 }
 
 @media (min-width: 576px) {

@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Attendance;
+use App\Models\AttendanceEmployee;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Employee extends Model
 {
@@ -17,7 +20,9 @@ class Employee extends Model
         'employee_comment',
     ];
 
-    public function Attendances() {
+    public function Attendances()
+    {
         return $this->hasMany('App\Models\Attendance');
     }
+
 }

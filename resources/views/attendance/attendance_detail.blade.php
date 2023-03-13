@@ -16,6 +16,7 @@
                 <div class="card-body">
                     <table class="table table-striped">
                         <tr>
+                            <th>日時</th>
                             <th>現場</th>
                             <th>従業員氏名</th>
                             <th>勤務時間</th>
@@ -24,10 +25,11 @@
                         </tr>
 
                         <tr class="dbconect">
+                            <td class="dbconect">{{ $attendance -> date -> format('Y/m/d') }}</td>
                             <td class="dbconect">{{ $attendance -> fields -> field_name }}</td>
                             <td class="dbconect">{{ $attendance -> employees -> employee_name }}</td>
-                            <td class="dbconect">{{ $attendance -> start_time }} 〜 {{ $attendance -> closing_time }}</td>
-                            <td class="dbconect">{{ $attendance -> overtime }}</td>
+                            <td class="dbconect">{{  substr($attendance -> start_time, 0, 5) }} 〜 {{ substr($attendance -> closing_time, 0, 5) }}</td>
+                            <td class="dbconect">{{ substr($attendance -> overtime, 0, 5) }}</td>
                             <td class="dbconect">{{ $attendance -> attendance_comment }}</td>
                         </tr>
                     </table>

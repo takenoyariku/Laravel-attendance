@@ -31,6 +31,7 @@ class AttendanceController extends Controller
         $attendance = new Attendance;
         $attendances = $attendance -> attendances();
         $time = Carbon::now();
+        $day = $attendance -> dateBuilder();
 
         //検索機能
         $year = $request -> input('year');
@@ -40,6 +41,7 @@ class AttendanceController extends Controller
 
         if (empty($year) || empty($month)) {
             $query -> whereYear('date', $time);
+            $query -> whereMonth('date',  $time);
         }
         if (!empty($year)) {
             $query -> whereYear('date',  $year);
@@ -50,7 +52,7 @@ class AttendanceController extends Controller
 
         $lists = $query -> get();
 
-        return view('attendance.attendance_list',compact('attendances', 'lists'));
+        return view('attendance.attendance_list',compact('attendances', 'lists', 'year', 'month'));
     }
 
     /**

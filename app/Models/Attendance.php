@@ -19,18 +19,30 @@ class Attendance extends Model
         'date',
     ];
 
-    public function employees() {
+    public function employees()
+    {
         return $this -> belongsTo('App\Models\Employee', 'employee_id') -> withTrashed();
     }
 
-    public function fields() {
+    public function fields()
+    {
         return $this -> belongsTo('App\Models\Field', 'field_id') -> withTrashed();
     }
 
-    public function attendances() {
+    public function attendances()
+    {
         return $this::withTrashed()
         ->with('fields','employees')
         ->get();
     }
+    
+    public function dateBuilder()
+    {
+        return $this::selectRaw('DAY(date) as day')
+        ->withTrashed()
+        ->count();
+    }
+
+
 
 }
